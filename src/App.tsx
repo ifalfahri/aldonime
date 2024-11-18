@@ -142,7 +142,7 @@ export default function App() {
           <h1 className="text-3xl font-bold text-center mb-6 text-white tracking-wider">Anime Explorer</h1>
           <div className="flex flex-col gap-4">
             <Button onClick={fetchRandomAnime} className="w-full bg-purple-600 hover:bg-purple-700">
-              <Sparkles className="mr-2 h-4 w-4" />
+              <Sparkles className="h-4 w-4" />
               Random Anime
             </Button>
             <div className="relative">
