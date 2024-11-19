@@ -56,21 +56,21 @@ export default function AnimeExplorer() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [suggestions, setSuggestions] = useState<Anime[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  // Add this function before the main component
-const formatDate = (date: { year: number; month: number; day: number } | null) => {
-  if (!date || !date.year) return 'N/A';
-  
-  try {
-    const dateObj = new Date(date.year, (date.month || 1) - 1, date.day || 1);
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    }).format(dateObj);
-  } catch (error) {
-    return `${date.year}${date.month ? `-${date.month}` : ''}${date.day ? `-${date.day}` : ''}`;
-  }
-};
+
+  const formatDate = (date: { year: number; month: number; day: number } | null) => {
+    if (!date || !date.year) return 'N/A';
+    
+    try {
+      const dateObj = new Date(date.year, (date.month || 1) - 1, date.day || 1);
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      }).format(dateObj);
+    } catch (error) {
+      return `${date.year}${date.month ? `-${date.month}` : ''}${date.day ? `-${date.day}` : ''}`;
+    }
+  };
 
   const fetchRandomAnime = async () => {
     setIsLoading(true)
