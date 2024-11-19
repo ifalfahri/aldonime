@@ -53,7 +53,7 @@ export default function AnimeExplorer() {
     const query = `
       query {
         Page(page: ${randomPage}, perPage: 10) {
-          media(type: ANIME, isAdult: false) {
+          media(type: ANIME, isAdult: false, genre_not_in: "ecchi") {
             id
             title {
               romaji
@@ -112,7 +112,7 @@ export default function AnimeExplorer() {
     const query = `
       query ($search: String) {
         Page(perPage: 10) {
-          media(type: ANIME, search: $search, isAdult: false) {
+          media(type: ANIME, search: $search, isAdult: false, genre_not_in: "ecchi") {
             id
             title {
               romaji
