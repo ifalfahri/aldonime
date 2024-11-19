@@ -34,48 +34,62 @@ export default function AnimeExplorer() {
 
   const fetchRandomAnime = async () => {
     setIsLoading(true)
+    const randomPage = Math.floor(Math.random() * 50) + 1
+    const randomOffset = Math.floor(Math.random() * 10)
+  
+    console.log('Fetching random anime...', { randomPage, randomOffset })
+  
     const query = `
       query {
-        Media(type: ANIME, sort: POPULARITY_DESC) {
-          id
-          title {
-            romaji
-            english
+        Page(page: ${randomPage}, perPage: 10) {
+          media(type: ANIME, isAdult: false) {
+            id
+            title {
+              romaji
+              english
+            }
+            coverImage {
+              large
+            }
+            description(asHtml: false)
+            averageScore
+            episodes
+            genres
           }
-          coverImage {
-            large
-          }
-          description(asHtml: false)
-          averageScore
-          episodes
-          genres
         }
       }
     `
-
+  
     try {
       const response = await fetch('https://graphql.anilist.co', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
-        body: JSON.stringify({ query })
+        body: JSON.stringify({ query }),
       })
-
       const data = await response.json()
-      if (data.data && data.data.Media) {
-        setAnime(data.data.Media)
-        setIsModalOpen(true)
-      } else {
-        console.error('Unexpected response structure:', data)
+      console.log('API Response:', data)
+      
+      const animeList = data.data.Page.media
+      if (!animeList || animeList.length === 0) {
+        console.error('No anime found in response')
+        return
       }
+      
+      const randomAnime = animeList[randomOffset]
+      console.log('Selected anime:', randomAnime)
+      setAnime(randomAnime)
+      setIsModalOpen(true)
     } catch (error) {
-      console.error('Error fetching random anime:', error)
+      console.error('Error fetching anime:', error)
     } finally {
       setIsLoading(false)
     }
   }
+  
+  // Make sure your button onClick is properly set up like this:
+  // <button onClick={fetchRandomAnime}>Get Random Anime</button>
 
   const searchAnime = async (search: string) => {
     const query = `
@@ -176,7 +190,7 @@ export default function AnimeExplorer() {
                 </Button>
               </div>
               {suggestions.length > 0 && (
-                <Command className="absolute w-full mt-1 bg-gray-800 bg-opacity-90 border border-gray-700 rounded-md overflow-hidden h-64">
+                <Command className="absolute w-full mt-1 bg-gray-800 border border-gray-700 rounded-md overflow-hidden h-64">
                   <CommandList className="max-h-full">
                     <CommandGroup>
                       {suggestions.map((suggestion) => (
