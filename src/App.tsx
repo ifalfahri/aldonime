@@ -22,7 +22,28 @@ type Anime = {
   averageScore: number
   episodes: number
   genres: string[]
+  status: string;
+  format: string;
+  season: string;
+  seasonYear: number;
+  startDate: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  endDate: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  duration: number;
+  studios: {
+    nodes: {
+      name: string;
+    }[];
+  };
 }
+
 
 const genreColors = [
   'bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-purple-500',
@@ -35,6 +56,21 @@ export default function AnimeExplorer() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [suggestions, setSuggestions] = useState<Anime[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  // Add this function before the main component
+const formatDate = (date: { year: number; month: number; day: number } | null) => {
+  if (!date || !date.year) return 'N/A';
+  
+  try {
+    const dateObj = new Date(date.year, (date.month || 1) - 1, date.day || 1);
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    }).format(dateObj);
+  } catch (error) {
+    return `${date.year}${date.month ? `-${date.month}` : ''}${date.day ? `-${date.day}` : ''}`;
+  }
+};
 
   const fetchRandomAnime = async () => {
     setIsLoading(true)
@@ -96,7 +132,7 @@ export default function AnimeExplorer() {
   const searchAnime = async (search: string) => {
     const query = `
       query ($search: String) {
-        Page(page: 1, perPage: 5) {
+        Page(perPage: 10) {
           media(type: ANIME, search: $search, isAdult: false) {
             id
             title {
@@ -108,10 +144,30 @@ export default function AnimeExplorer() {
               large
               medium
             }
-            description(asHtml: false)
-            averageScore
             episodes
+            averageScore
             genres
+            description(asHtml: false)
+            status
+            format
+            season
+            seasonYear
+            startDate {
+              year
+              month
+              day
+            }
+            endDate {
+              year
+              month
+              day
+            }
+            duration
+            studios {
+              nodes {
+                name
+              }
+            }
           }
         }
       }
@@ -233,38 +289,43 @@ export default function AnimeExplorer() {
 
       {anime && (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="bg-gray-800 bg-opacity-90 backdrop-filter backdrop-blur-lg text-white border-gray-700 max-w-3xl max-h-[90vh] overflow-hidden">
+          <DialogContent className="bg-gray-800 bg-opacity-90 text-white border-gray-700 max-w-[90vw] md:max-w-3xl 
+    max-h-[85vh] md:max-h-[90vh] 
+    overflow-hidden
+    p-4 md:p-6 rounded-lg">
             <ScrollArea className="h-full pr-4">
               <DialogHeader>
                 <DialogTitle>
-                  <div className="space-y-1">
-                  <div className="text-xl font-semibold">
+                  <div className="text-lg md:text-xl font-semibold">
                     {anime.title.romaji}
                   </div>
                   {anime.title.english && anime.title.english !== anime.title.romaji && (
-                    <div className="text-gray-400 text-base">
+                    <div className="text-gray-400 text-sm md:text-base">
                       {anime.title.english}
                     </div>
                   )}
                   {anime.title.native && (
-                    <div className="text-gray-500 text-xs">
+                    <div className="text-gray-500 text-xs md:text-sm">
                       {anime.title.native}
                     </div>
                   )}
-                  </div>
                 </DialogTitle>
               </DialogHeader>
-              <div className="space-y-4">
+              <div className="space-y-4 mt-4">
                 <img
                   src={anime.coverImage.large}
                   alt={anime.title.romaji}
                   className="w-full rounded-lg md:w-[200px] md:float-left md:mr-4 mb-4"
                 />
                 <div className="space-y-2">
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div>Episodes: {anime.episodes}</div>
-                    <div>Score: {anime.averageScore}%</div>
-                  </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+                <div>Episodes: {anime.episodes || 'N/A'}</div>
+                <div>Score: {anime.averageScore ? `${anime.averageScore}%` : 'N/A'}</div>
+                <div>Status: {anime.status || 'N/A'}</div>
+                <div>Format: {anime.format || 'N/A'}</div>
+                <div>Season: {anime.season} {anime.seasonYear}</div>
+                <div>Start Date: {formatDate(anime.startDate)}</div>
+              </div>
                   <div className="flex flex-wrap gap-2">
                     {anime.genres.map((genre, index) => (
                       <Badge key={genre} className={`${genreColors[index % genreColors.length]} text-white`}>
