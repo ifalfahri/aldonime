@@ -194,7 +194,7 @@ export default function AnimeExplorer() {
                         <CommandItem
                           key={suggestion.id}
                           onSelect={() => handleSelectAnime(suggestion)}
-                          className="cursor-pointer hover:bg-gray-700 p-2"
+                          className="cursor-pointer data-[selected=true]:bg-gray-700 p-2"
                         >
                           <div className="flex items-start space-x-2">
                             <img
