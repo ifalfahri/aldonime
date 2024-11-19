@@ -305,10 +305,10 @@ export default function AnimeExplorer() {
       {anime && (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogContent className="bg-gray-800 bg-opacity-90 text-white border-gray-700 max-w-[90vw] md:max-w-3xl 
-    max-h-[85vh] md:max-h-[90vh] 
-    overflow-hidden
-    p-4 md:p-6 rounded-lg">
-            <ScrollArea className="h-full pr-4">
+            max-h-[85vh] md:max-h-[90vh] 
+            overflow-hidden
+            p-4 md:p-6 rounded-lg">
+            <ScrollArea className="md:h-full h-[85vh]">
               <DialogHeader>
                 <DialogTitle>
                   <div className="text-lg md:text-xl font-semibold">
@@ -332,15 +332,33 @@ export default function AnimeExplorer() {
                   alt={anime.title.romaji}
                   className="w-full rounded-lg md:w-[200px] md:float-left md:mr-4 mb-4"
                 />
-                <div className="space-y-2">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                <div>Episodes: {anime.episodes || 'N/A'}</div>
-                <div>Score: {anime.averageScore ? `${anime.averageScore}%` : 'N/A'}</div>
-                <div>Status: {anime.status || 'N/A'}</div>
-                <div>Format: {anime.format || 'N/A'}</div>
-                <div>Season: {anime.season} {anime.seasonYear}</div>
-                <div>Start Date: {formatDate(anime.startDate)}</div>
-              </div>
+                <div className="mt-4 md:mt-0 space-y-4 flex-1">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-y-2 gap-x-4 text-sm">
+                  <div className="flex flex-col">
+                    <span className="text-gray-400">Format</span>
+                    <span>{anime.format || 'N/A'}</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-gray-400">Episodes</span>
+                    <span>{anime.episodes || 'N/A'}</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-gray-400">Score</span>
+                    <span>{anime.averageScore ? `${anime.averageScore}%` : 'N/A'}</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-gray-400">Status</span>
+                    <span>{anime.status || 'N/A'}</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-gray-400">Season</span>
+                    <span>{anime.season} {anime.seasonYear}</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-gray-400">Studio</span>
+                    <span>{anime.studios.nodes[0]?.name || 'N/A'}</span>
+                  </div>
+                </div>
                   <div className="flex flex-wrap gap-2">
                     {anime.genres.map((genre, index) => (
                       <Badge key={genre} className={`${genreColors[index % genreColors.length]} text-white`}>
