@@ -176,7 +176,7 @@ export default function AnimeExplorer() {
                 </Button>
               </div>
               {suggestions.length > 0 && (
-                <Command className="absolute w-full mt-1 bg-gray-800 bg-opacity-90 backdrop-filter backdrop-blur-lg border border-gray-700 rounded-md overflow-hidden max-h-128">
+                <Command className="absolute w-full mt-1 bg-gray-800 bg-opacity-90 border border-gray-700 rounded-md overflow-hidden h-64">
                   <CommandList className="max-h-full">
                     <CommandGroup>
                       {suggestions.map((suggestion) => (
