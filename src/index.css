@@ -65,6 +65,15 @@
   }
 }
 
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari and Opera */
+}
+
 .command-desktop-scroll {
   @media (min-width: 768px) {
     /* Hide scrollbar for Chrome, Safari and Opera */
