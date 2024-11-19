@@ -26,17 +26,6 @@ type Anime = {
   format: string;
   season: string;
   seasonYear: number;
-  startDate: {
-    year: number;
-    month: number;
-    day: number;
-  };
-  endDate: {
-    year: number;
-    month: number;
-    day: number;
-  };
-  duration: number;
   studios: {
     nodes: {
       name: string;
@@ -56,21 +45,6 @@ export default function AnimeExplorer() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [suggestions, setSuggestions] = useState<Anime[]>([])
   const [isLoading, setIsLoading] = useState(false)
-
-  const formatDate = (date: { year: number; month: number; day: number } | null) => {
-    if (!date || !date.year) return 'N/A';
-    
-    try {
-      const dateObj = new Date(date.year, (date.month || 1) - 1, date.day || 1);
-      return new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      }).format(dateObj);
-    } catch (error) {
-      return `${date.year}${date.month ? `-${date.month}` : ''}${date.day ? `-${date.day}` : ''}`;
-    }
-  };
 
   const fetchRandomAnime = async () => {
     setIsLoading(true)
@@ -98,16 +72,6 @@ export default function AnimeExplorer() {
             format
             season
             seasonYear
-            startDate {
-              year
-              month
-              day
-            }
-            endDate {
-              year
-              month
-              day
-            }
             studios {
               nodes {
                 name
@@ -168,16 +132,6 @@ export default function AnimeExplorer() {
             format
             season
             seasonYear
-            startDate {
-              year
-              month
-              day
-            }
-            endDate {
-              year
-              month
-              day
-            }
             studios {
               nodes {
                 name
