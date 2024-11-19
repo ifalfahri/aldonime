@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -9,6 +7,7 @@ import { Search, Sparkles, Loader2 } from 'lucide-react'
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import Footer from './components/Footer'
 
 type Anime = {
   id: number
@@ -186,7 +185,7 @@ export default function AnimeExplorer() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg border-gray-700">
+      <Card className="w-full max-w-md bg-gray-800 bg-opacity-50 border-gray-700">
         <CardContent className="p-6">
           <p className='text-center text-white font-light text-xs mb-2 tracking-widest'>ALDONIME</p>
           <h1 className="text-3xl font-bold text-center mb-6 text-white tracking-wider">Anime Explorer</h1>
@@ -327,6 +326,7 @@ export default function AnimeExplorer() {
           </DialogContent>
         </Dialog>
       )}
+      <Footer/>
     </div>
   )
 }
