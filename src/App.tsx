@@ -77,8 +77,6 @@ export default function AnimeExplorer() {
     const randomPage = Math.floor(Math.random() * 50) + 1
     const randomOffset = Math.floor(Math.random() * 10)
   
-    console.log('Fetching random anime...', { randomPage, randomOffset })
-  
     const query = `
       query {
         Page(page: ${randomPage}, perPage: 10) {
@@ -92,10 +90,29 @@ export default function AnimeExplorer() {
             coverImage {
               large
             }
-            description(asHtml: false)
-            averageScore
             episodes
+            averageScore
             genres
+            description(asHtml: false)
+            status
+            format
+            season
+            seasonYear
+            startDate {
+              year
+              month
+              day
+            }
+            endDate {
+              year
+              month
+              day
+            }
+            studios {
+              nodes {
+                name
+              }
+            }
           }
         }
       }
@@ -110,7 +127,6 @@ export default function AnimeExplorer() {
         body: JSON.stringify({ query }),
       })
       const data = await response.json()
-      console.log('API Response:', data)
       
       const animeList = data.data.Page.media
       if (!animeList || animeList.length === 0) {
@@ -162,7 +178,6 @@ export default function AnimeExplorer() {
               month
               day
             }
-            duration
             studios {
               nodes {
                 name
