@@ -87,15 +87,12 @@ export default function AnimeExplorer() {
       setIsLoading(false)
     }
   }
-  
-  // Make sure your button onClick is properly set up like this:
-  // <button onClick={fetchRandomAnime}>Get Random Anime</button>
 
   const searchAnime = async (search: string) => {
     const query = `
       query ($search: String) {
         Page(page: 1, perPage: 5) {
-          media(type: ANIME, search: $search) {
+          media(type: ANIME, search: $search, isAdult: false) {
             id
             title {
               romaji
