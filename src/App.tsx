@@ -12,7 +12,11 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 type Anime = {
   id: number
-  title: { romaji: string; english: string }
+  title: { 
+    english: string | null;
+    romaji: string;
+    native: string | null; 
+  }
   coverImage: { large: string; medium: string }
   description: string
   averageScore: number
@@ -47,6 +51,7 @@ export default function AnimeExplorer() {
             title {
               romaji
               english
+              native
             }
             coverImage {
               large
@@ -97,6 +102,7 @@ export default function AnimeExplorer() {
             title {
               romaji
               english
+              native
             }
             coverImage {
               large
@@ -230,7 +236,23 @@ export default function AnimeExplorer() {
           <DialogContent className="bg-gray-800 bg-opacity-90 backdrop-filter backdrop-blur-lg text-white border-gray-700 max-w-3xl max-h-[90vh] overflow-hidden">
             <ScrollArea className="h-full pr-4">
               <DialogHeader>
-                <DialogTitle>{anime.title.english || anime.title.romaji}</DialogTitle>
+                <DialogTitle>
+                  <div className="space-y-1">
+                  <div className="text-xl font-semibold">
+                    {anime.title.romaji}
+                  </div>
+                  {anime.title.english && anime.title.english !== anime.title.romaji && (
+                    <div className="text-gray-400 text-base">
+                      {anime.title.english}
+                    </div>
+                  )}
+                  {anime.title.native && (
+                    <div className="text-gray-500 text-xs">
+                      {anime.title.native}
+                    </div>
+                  )}
+                  </div>
+                </DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
                 <img
