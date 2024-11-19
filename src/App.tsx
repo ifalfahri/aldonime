@@ -258,7 +258,7 @@ export default function AnimeExplorer() {
 
       {anime && (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="bg-gray-800 bg-opacity-90 text-white border-gray-700 max-w-[90vw] md:max-w-3xl 
+          <DialogContent className="bg-gray-800 text-white border-gray-700 max-w-[90vw] md:max-w-3xl 
             max-h-[85vh] md:max-h-[90vh] 
             overflow-hidden
             p-4 md:p-6 rounded-lg">
@@ -284,7 +284,7 @@ export default function AnimeExplorer() {
                 <img
                   src={anime.coverImage.large}
                   alt={anime.title.romaji}
-                  className="w-full rounded-lg md:w-[200px] md:float-left md:mr-4 mb-4"
+                  className="w-full rounded-lg md:w-64 md:float-left md:mr-4 mb-4"
                 />
                 <div className="mt-4 md:mt-0 space-y-4 flex-1">
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-y-2 gap-x-4 text-sm">
