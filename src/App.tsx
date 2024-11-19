@@ -251,7 +251,7 @@ export default function AnimeExplorer() {
                     ))}
                   </div>
                 </div>
-                <DialogDescription className="text-gray-300">{anime.description}</DialogDescription>
+                <DialogDescription className="text-gray-300"><div dangerouslySetInnerHTML={{ __html: anime.description }} /></DialogDescription>
               </div>
             </ScrollArea>
           </DialogContent>
