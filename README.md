@@ -1,50 +1,21 @@
-# React + TypeScript + Vite
+# 🌟 Aldonime: Anime Explorer 🎥
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Anime Explorer** is an app that lets you discover random or searched anime using AniList's GraphQL API. Dive into the anime universe and explore titles with a sleek and interactive UI! 🚀
 
-Currently, two official plugins are available:
+## ✨ Features
+- 🎲 **Random Anime**: Fetch a random anime with one click.
+- 🔍 **Search Functionality**: Search anime by title and get quick suggestions.
+- 📊 **Anime Details**: View detailed information, including episodes, genres, score, season, studio, and more.
+- ⚡ **Interactive UI**: Modern and responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 💻 Tech Stack
+- [![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square)](https://reactjs.org/)
+- [![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white&style=flat-square)](https://www.typescriptlang.org/)
+- [![Tailwind CSS](https://img.shields.io/badge/-Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)](https://tailwindcss.com/)
+- [![AniList API](https://img.shields.io/badge/-AniList_GraphQL_API-FF9A00?logo=graphql&logoColor=white&style=flat-square)](https://anilist.co/graphiql)
 
-## Expanding the ESLint configuration
+## 📷 Screenshots
+✨ Add your screenshots here! (You can add images of the app's key features like the search bar, anime details modal, etc.)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 🌐 Live Demo
+🚀 Check out the live demo here: [Aldonime](https://aldonime.vercel.app)
