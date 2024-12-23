@@ -5,7 +5,7 @@
 <div align="center">
 
 **Check it out here:**<br>
-[Aldonime](https://aldonime.vercel.app)
+[Aldonime Live Demo](https://aldonime.vercel.app)
 
 </div>
 
